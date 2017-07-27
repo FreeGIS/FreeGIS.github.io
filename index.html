@@ -56,9 +56,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -68,139 +68,6 @@
 </header>
       <div class="outer">
         <section id="main">
-  
-    <article id="true-dotDensity" class="article article-type-true" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/07/02/dotDensity/" class="article-date">
-  <time datetime="2016-07-01T16:00:00.000Z" itemprop="datePublished">2016-07-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/02/dotDensity/">OpenLayers3点密度图</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta charset="UTF-8">
-    <title>中国省人口点密度图</title>
-    <style>
-        html, body, #map {
-            height: 100%;
-            padding: 0;
-            margin: 0;
-        }
-    </style>
-    <link rel="stylesheet" href="/plugin/ol/ol.css" type="text/css">
-    <script src="/plugin/ol/ol.js"></script>
-	<script src="/plugin/turf.extend.js"></script>
-    <script>
-		var map;
-		var dotDensityLayer;
-		var format = 'image/png';
-		var geojsonFormat=new ol.format.GeoJSON({defaultDataProjection:"EPSG:3857"});
-		var bounds = [8181867.06845677, 427100.336550237, 15037859.1428885, 7086980.54132823];
-		function init() {
-			var baseMap=new ol.layer.Tile({
-				source: new ol.source.XYZ({
-					url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}.png'
-				})
-			});
-			var dotDensityStyle=new ol.style.Style({
-				fill: new ol.style.Fill({
-					color: 'rgba(255, 255, 255, 0.2)'
-				}),
-				stroke: new ol.style.Stroke({
-					color: 'rgba(0, 255, 0, 1)'
-				}),
-				image: new ol.style.Circle({
-					radius: 1,
-					stroke: new ol.style.Stroke({
-						color: 'rgba(255, 0, 0, 1)'
-					}),
-					fill: new ol.style.Fill({
-						color: 'rgba(255, 0, 0, 1)'
-					})
-				})
-			});
-			
-			var xzqSource=new ol.source.Vector();
-			var dotDensitySource=new ol.source.Vector();
-			fetch('/data/province.json').then(function(res) {
-				if(res.ok){
-					res.text().then(function(data) {
-						var xzqfeatures = geojsonFormat.readFeatures(data);
-						xzqSource.addFeatures(xzqfeatures);
-						var result = turf.dotDensity(JSON.parse(data), 'population');
-						var dotDensityfeatures=geojsonFormat.readFeatures(result);
-						dotDensitySource.addFeatures(dotDensityfeatures);
-					});
-				}
-				
-			});
-			
-			
-			
-			
-			
-			var china = new ol.layer.Vector({
-				source: xzqSource,
-				style:dotDensityStyle
-			});
-			
-			dotDensityLayer = new ol.layer.Vector({
-				source:dotDensitySource,
-				style:dotDensityStyle
-			});
-			var projection = new ol.proj.Projection({
-				code: 'EPSG:3857',
-				units: 'm',
-				axisOrientation: 'neu'
-			});
-			map = new ol.Map({
-				controls: [],
-				layers: [baseMap,china,dotDensityLayer],
-				target: 'map',
-				view: new ol.View({
-					projection: projection
-				})
-			});
-			map.getView().fit(bounds, map.getSize());
- 
-		}
-	</script>
-</head>
-<body onload="init()">
-    <div id="map"></div>
-</body>
-</html>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/02/dotDensity/" data-id="cj5lv1cxd0000c0o0jeq3n1ry" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
   
     <article id="false-FeatureAnimation" class="article article-type-false" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -321,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/01/FeatureAnimation/" data-id="cj5lv1cxq0001c0o0qll03232" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/01/FeatureAnimation/" data-id="cj5lv5m5y0000zoo0imfuw9tw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
@@ -343,7 +210,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
     </div>
@@ -353,7 +220,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/OpenLayers-3/" style="font-size: 10px;">OpenLayers 3</a>
     </div>
@@ -372,13 +239,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2016/07/02/dotDensity/">OpenLayers3点密度图</a>
-          </li>
         
           <li>
             <a href="/2016/07/01/FeatureAnimation/">OpenLayers3自定义动画</a>
@@ -397,7 +260,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 遥想公瑾当年<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
