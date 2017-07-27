@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="UTF-8">
     <title>中国省人口点密度图</title>
     <style>
@@ -22,7 +23,7 @@
 		function init() {
 			var baseMap=new ol.layer.Tile({
 				source: new ol.source.XYZ({
-					url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}.png'
+					url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}.png'
 				})
 			});
 			var dotDensityStyle=new ol.style.Style({
