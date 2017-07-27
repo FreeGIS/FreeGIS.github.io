@@ -22,9 +22,9 @@
 		var bounds = [8181867.06845677, 427100.336550237, 15037859.1428885, 7086980.54132823];
 		function init() {
 			var baseMap=new ol.layer.Tile({
-				source: new ol.source.XYZ({
-					url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer/tile/{z}/{y}/{x}.png'
-				})
+				 source : new ol.source.XYZ({
+					url : 'http://cache1.arcgisonline.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}'
+				 })
 			});
 			var dotDensityStyle=new ol.style.Style({
 				fill: new ol.style.Fill({
