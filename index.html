@@ -56,9 +56,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -104,9 +104,140 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/27/hello-world/" data-id="cj5ltes7500002co0gqjwjg1i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/27/hello-world/" data-id="cj5ltra6b0000vko01e9rra1s" class="article-share-link">Partager</a>
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="false-FeatureAnimation" class="article article-type-false" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/01/FeatureAnimation/" class="article-date">
+  <time datetime="2016-06-30T16:00:00.000Z" itemprop="datePublished">2016-07-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/01/FeatureAnimation/">OpenLayers3自定义动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html>
+<html>
+  <head>
+    <title>自定义动画</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.16.0/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.16.0/build/ol.js"></script>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script>
+      var map = new ol.Map({
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM({
+              wrapX: false
+            })
+          })
+        ],
+        controls: ol.control.defaults({
+          attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
+            collapsible: false
+          })
+        }),
+        target: 'map',
+        view: new ol.View({
+          center: [0, 0],
+          zoom: 1
+        })
+      });
+
+      var source = new ol.source.Vector({
+        wrapX: false
+      });
+      var vector = new ol.layer.Vector({
+        source: source
+      });
+      map.addLayer(vector);
+
+      function addRandomFeature() {
+        var x = Math.random() * 360 - 180;
+        var y = Math.random() * 180 - 90;
+        var geom = new ol.geom.Point(ol.proj.transform([x, y],
+            'EPSG:4326', 'EPSG:3857'));
+        var feature = new ol.Feature(geom);
+        source.addFeature(feature);
+      }
+
+      var duration = 3000;
+      function flash(feature) {
+        var start = new Date().getTime();
+        var listenerKey;
+
+        function animate(event) {
+          var vectorContext = event.vectorContext;
+          var frameState = event.frameState;
+          var flashGeom = feature.getGeometry().clone();
+          var elapsed = frameState.time - start;
+          var elapsedRatio = elapsed / duration;
+          // radius will be 5 at start and 30 at end.
+          var radius = ol.easing.easeOut(elapsedRatio) * 10 + 5;
+          var opacity = ol.easing.easeOut(1 - elapsedRatio);
+          var style = new ol.style.Style({
+            image: new ol.style.Circle({
+              radius: radius,
+              snapToPixel: false,
+              stroke: new ol.style.Stroke({
+                color: 'rgba(255, 0, 0, ' + opacity + ')',
+                width: 0.25 + opacity
+              })
+            })
+          });
+
+          vectorContext.setStyle(style);
+          vectorContext.drawGeometry(flashGeom);
+          if (elapsed > duration) {
+			start = new Date().getTime();
+			animate(event);
+          }
+          map.render();
+        }
+        listenerKey = map.on('postcompose', animate);
+      }
+
+      source.on('addfeature', function(e) {
+        flash(e.feature);
+      });
+	  //生成10个测试点数据
+	  for(var i=0;i<10;i++)
+	  {
+		 addRandomFeature();
+	  }
+    </script>
+  </body>
+</html>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/01/FeatureAnimation/" data-id="cj5ltra6m0001vko0c0f172mq" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
+
     </footer>
   </div>
   
@@ -123,15 +254,10 @@
 
   
     
-
-  
-    
-  
-    
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
     </div>
   </div>
 
@@ -139,12 +265,35 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/OpenLayers-3/" style="font-size: 10px;">OpenLayers 3</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
             <a href="/2017/07/27/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/01/FeatureAnimation/">OpenLayers3自定义动画</a>
           </li>
         
       </ul>
@@ -160,7 +309,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 遥想公瑾当年<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
