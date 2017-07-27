@@ -3,18 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives | FreeGIS</title>
+  <title>Ol3结合Turf实现点密度图 | FreeGIS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="分享展示一些开源GIS知识与案例">
-<meta property="og:type" content="website">
-<meta property="og:title" content="FreeGIS">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="由于Ol3的空间分析的例子不是特别多，主要作为地图的展示与交互。而turf.js是客户端用于一些图形分析处理的空间库，在github上能找到不少关于turf做扩展的例子。作者找到关于使用turf扩展的turf-dotDensity只做了本文的一个点密度专题图的例子，仅供参考。 例子请参考ol3-dotDensity.">
+<meta name="keywords" content="OpenLayers 3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ol3结合Turf实现点密度图">
+<meta property="og:url" content="http://yoursite.com/2016/07/04/Ol3+Turf实现点密度图/index.html">
 <meta property="og:site_name" content="FreeGIS">
-<meta property="og:description" content="分享展示一些开源GIS知识与案例">
+<meta property="og:description" content="由于Ol3的空间分析的例子不是特别多，主要作为地图的展示与交互。而turf.js是客户端用于一些图形分析处理的空间库，在github上能找到不少关于turf做扩展的例子。作者找到关于使用turf扩展的turf-dotDensity只做了本文的一个点密度专题图的例子，仅供参考。 例子请参考ol3-dotDensity.">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/demo/dotDensity.png">
+<meta property="og:updated_time" content="2016-07-04T06:41:11.908Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FreeGIS">
-<meta name="twitter:description" content="分享展示一些开源GIS知识与案例">
+<meta name="twitter:title" content="Ol3结合Turf实现点密度图">
+<meta name="twitter:description" content="由于Ol3的空间分析的例子不是特别多，主要作为地图的展示与交互。而turf.js是客户端用于一些图形分析处理的空间库，在github上能找到不少关于turf做扩展的例子。作者找到关于使用turf扩展的turf-dotDensity只做了本文的一个点密度专题图的例子，仅供参考。 例子请参考ol3-dotDensity.">
+<meta name="twitter:image" content="http://yoursite.com/images/demo/dotDensity.png">
   
     <link rel="alternate" href="/atom.xml" title="FreeGIS" type="application/atom+xml">
   
@@ -67,58 +71,54 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/07/04/Ol3+Turf实现点密度图/" class="archive-article-date">
-  <time datetime="2016-07-04T06:52:03.000Z" itemprop="datePublished">Jul 4</time>
+        <section id="main"><article id="post-Ol3+Turf实现点密度图" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/04/Ol3+Turf实现点密度图/" class="article-date">
+  <time datetime="2016-07-04T06:52:03.000Z" itemprop="datePublished">2016-07-04</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/04/Ol3+Turf实现点密度图/">Ol3结合Turf实现点密度图</a>
+    <h1 class="article-title" itemprop="name">
+      Ol3结合Turf实现点密度图
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-false">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/07/01/FeatureAnimation/" class="archive-article-date">
-  <time datetime="2016-06-30T16:00:00.000Z" itemprop="datePublished">Jul 1</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/07/01/FeatureAnimation/">OpenLayers3自定义动画</a>
-    </h1>
-  
+        <p>由于Ol3的空间分析的例子不是特别多，主要作为地图的展示与交互。而turf.js是客户端用于一些图形分析处理的空间库，在github上能找到不少关于turf做扩展的例子。作者找到关于使用turf扩展的turf-dotDensity只做了本文的一个点密度专题图的例子，仅供参考。<br><img src="/images/demo/dotDensity.png" alt="Alt 点密度效果图" title="ol3+turf点密度图"></p>
+<h2 id="例子请参考ol3-dotDensity"><a href="#例子请参考ol3-dotDensity" class="headerlink" title="例子请参考ol3-dotDensity."></a>例子请参考<a href="http://freegis.github.io/examples/dotDensity.html" target="_blank" rel="external">ol3-dotDensity</a>.</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/04/Ol3+Turf实现点密度图/" data-id="cj5lv9lkd00007ko07wz9y4iv" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/01/FeatureAnimation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">OpenLayers3自定义动画</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
