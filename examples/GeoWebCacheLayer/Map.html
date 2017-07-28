@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.17.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.17.1/build/ol.js"></script>
+	<script src="GeoWebCacheSource.js"></script>
+    <script>
+        function init()
+        {
+            var streetLayer=new ol.layer.Tile({
+                visible: true,
+                source: new ol.source.XYZ({
+                    url: 'http://www.google.cn/maps/vt?pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m3!1e0!2sm!3i342009817!3m9!2szh-CN!3sCN!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!4e0&token=32965'
+                })
+            });
+			//加载geowebcache离线地图
+            var road= new ol.layer.Tile({
+                visible:true,
+                source: new GeoWebCacheSource({
+					tileRoot:'cite_road',
+					format:'png',
+					srid:'epsg:900913'
+				})
+            })
+            var map = new ol.Map({
+                controls: [],
+                layers: [
+                    streetLayer,road
+                ],
+                target: 'map',
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([119.4157,32.4]),
+                    zoom: 2
+                })
+            });
+
+        }
+    </script>
+</head>
+<body onload="init()">
+    <div id="map">
+    </div>
+</body>
+</html>

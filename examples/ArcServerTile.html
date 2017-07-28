@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ArcServer切片加载</title>
+    <link rel="stylesheet" href="/plugin/ol/ol.css" type="text/css">
+    <script src="/plugin/ol/ol.js"></script>
+    <script>
+        function init() {
+        	var format = 'image/png';
+        	 var streetLayer=new ol.layer.Tile({
+                visible: true,
+                source: new ol.source.XYZ({
+                    url: 'http://www.google.cn/maps/vt?pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m3!1e0!2sm!3i342009817!3m9!2szh-CN!3sCN!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!4e0&token=32965'
+                })
+            });
+			//加载ArcServer离线地图
+            var road= new ol.layer.Tile({
+                visible:true,
+               source : new ol.source.XYZ({
+        						tileUrlFunction : function (xyz, obj1, obj2) {
+								console.log(xyz);
+        							var z = xyz[0];
+        							var x = Math.abs(xyz[1]);
+        							var y = Math.abs(xyz[2]) - 1;
+        							var x = 'C' + padLeft(8, x.toString(16));
+        							var y = 'R' + padLeft(8, y.toString(16));
+        							var z = 'L' + padLeft(2, z);
+        							var url = 'ArcServerTile/' + z + '/' + y + '/' + x + '.png';
+        							return url;
+        						}
+        					})
+            })
+            var map = new ol.Map({
+                controls: [],
+                layers: [
+                    streetLayer,road
+                ],
+                target: 'map',
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([118.7157,32.2]),
+                    zoom: 10
+                })
+            });
+        
+			//将10进制转16进制，余位补0，凑成ArcServer的切片格式
+        	function padLeft(num, val) {
+        		return (new Array(num).join('0') + val).slice(-num);
+        	}
+
+        }
+    </script>
+</head>
+<body onload="init()">
+    <div id="map">
+    </div>
+</body>
+</html>
