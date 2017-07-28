@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>OpenLayers 3加载网络底图 | FreeGIS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ非标准的XYZ加载ArcServer切片加载GeoWebCache切片中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求） 例子请参考">
+<meta name="keywords" content="OpenLayers 3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenLayers 3加载网络底图">
+<meta property="og:url" content="http://yoursite.com/2016/10/28/OpenLayers3加载网络底图/index.html">
+<meta property="og:site_name" content="FreeGIS">
+<meta property="og:description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ非标准的XYZ加载ArcServer切片加载GeoWebCache切片中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求） 例子请参考">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/demo/tianditu.png">
+<meta property="og:image" content="http://yoursite.com/images/demo/baidu.png">
+<meta property="og:image" content="http://yoursite.com/images/demo/google.png">
+<meta property="og:updated_time" content="2017-07-28T00:44:54.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenLayers 3加载网络底图">
+<meta name="twitter:description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ非标准的XYZ加载ArcServer切片加载GeoWebCache切片中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求） 例子请参考">
+<meta name="twitter:image" content="http://yoursite.com/images/demo/tianditu.png">
+  
+    <link rel="alternate" href="/atom.xml" title="FreeGIS" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">FreeGIS</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">开源GIS的探索者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-OpenLayers3加载网络底图" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/28/OpenLayers3加载网络底图/" class="article-date">
+  <time datetime="2016-10-28T08:30:03.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OpenLayers 3加载网络底图
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。</p>
+<h2 id="标准XYZ"><a href="#标准XYZ" class="headerlink" title="标准XYZ"></a>标准XYZ</h2><h2 id="非标准的XYZ"><a href="#非标准的XYZ" class="headerlink" title="非标准的XYZ"></a>非标准的XYZ</h2><h2 id="加载ArcServer切片"><a href="#加载ArcServer切片" class="headerlink" title="加载ArcServer切片"></a>加载ArcServer切片</h2><h2 id="加载GeoWebCache切片"><a href="#加载GeoWebCache切片" class="headerlink" title="加载GeoWebCache切片"></a>加载GeoWebCache切片</h2><p>中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求）</p>
+<p><img src="/images/demo/tianditu.png" alt="Alt 天地图底图" title="天地图"><br><img src="/images/demo/baidu.png" alt="Alt 百度底图" title="百度地图"><br><img src="/images/demo/google.png" alt="Alt 谷歌底图" title="谷歌地图"><br>例子请参考<a href="https://freegis.github.io/examples/CoordinateTransform.html" target="_blank" rel="external">ol3坐标纠正</a>.<br>github地址<a href="https://github.com/FreeGIS/CoordinateTransform" target="_blank" rel="external">CoordinateTransform.js</a>.</p>
+<h2 id="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform"><a href="#本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform" class="headerlink" title="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis_LayerTransform."></a>本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：<a href="https://github.com/FreeGIS/postgis_LayerTransform" target="_blank" rel="external">postgis_LayerTransform</a>.</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/28/OpenLayers3加载网络底图/" data-id="cj5n5m54h0006h4o0nfoxxec8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/20/网络底图坐标偏移/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络底图坐标偏移</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/OpenLayers-3/" style="font-size: 10px;">OpenLayers 3</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/28/OpenLayers3加载网络底图/">OpenLayers 3加载网络底图</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/20/网络底图坐标偏移/">网络底图坐标偏移</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/04/Ol3+Turf实现点密度图/">Ol3结合Turf实现点密度图</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/01/Ol3叠加Echarts/">Ol3叠加Echarts</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/01/FeatureAnimation/">OpenLayers3自定义动画</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 遥想公瑾当年<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

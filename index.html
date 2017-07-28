@@ -69,6 +69,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-OpenLayers3加载网络底图" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/28/OpenLayers3加载网络底图/" class="article-date">
+  <time datetime="2016-10-28T08:30:03.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/28/OpenLayers3加载网络底图/">OpenLayers 3加载网络底图</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。</p>
+<h2 id="标准XYZ"><a href="#标准XYZ" class="headerlink" title="标准XYZ"></a>标准XYZ</h2><h2 id="非标准的XYZ"><a href="#非标准的XYZ" class="headerlink" title="非标准的XYZ"></a>非标准的XYZ</h2><h2 id="加载ArcServer切片"><a href="#加载ArcServer切片" class="headerlink" title="加载ArcServer切片"></a>加载ArcServer切片</h2><h2 id="加载GeoWebCache切片"><a href="#加载GeoWebCache切片" class="headerlink" title="加载GeoWebCache切片"></a>加载GeoWebCache切片</h2><p>中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求）</p>
+<p><img src="/images/demo/tianditu.png" alt="Alt 天地图底图" title="天地图"><br><img src="/images/demo/baidu.png" alt="Alt 百度底图" title="百度地图"><br><img src="/images/demo/google.png" alt="Alt 谷歌底图" title="谷歌地图"><br>例子请参考<a href="https://freegis.github.io/examples/CoordinateTransform.html" target="_blank" rel="external">ol3坐标纠正</a>.<br>github地址<a href="https://github.com/FreeGIS/CoordinateTransform" target="_blank" rel="external">CoordinateTransform.js</a>.</p>
+<h2 id="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform"><a href="#本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform" class="headerlink" title="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis_LayerTransform."></a>本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：<a href="https://github.com/FreeGIS/postgis_LayerTransform" target="_blank" rel="external">postgis_LayerTransform</a>.</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/10/28/OpenLayers3加载网络底图/" data-id="cj5n5m54h0006h4o0nfoxxec8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-网络底图坐标偏移" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/20/网络底图坐标偏移/" class="article-date">
+  <time datetime="2016-07-20T06:52:03.000Z" itemprop="datePublished">2016-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/20/网络底图坐标偏移/">网络底图坐标偏移</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在做WebGIS开发时，常常使用在线网络底图，由于我国的特殊国情，在线底图都是实行加密措施，导致我们想把自己采集的经纬度数据在地图展示时，令人苦恼的是坐标“飞了”。显而易见的思路是，根据网络底图的偏移，对自己的采集数据加减偏移量，从而达到比较好的叠加。但更令人痛苦的是，不同的底图，如百度和谷歌，和天地图等等不同地图，偏移量却又各不相同，如之奈何？本文作者对常用地图偏移总结如下：</p>
+<ul>
+<li>** 火星坐标系组  高德地图，谷歌地图,ESRI的部分服务底图等都是使用火星坐标系（谷歌地图中国数据由高德提供，两者数据本质其实是一模一样的）</li>
+<li>** 几乎无偏移组  天地图，OpenStreetMap是几乎没有偏移的，也就是我们的坐标不用加减偏移，直接转墨卡托就可以叠加上</li>
+<li>** 万恶的百度  百度地图是最最恶心的，一般，先将自己无偏移的坐标转火星坐标系，再由火星转百度经纬度，而你叠加的一定是百度的墨卡托投影的地图，百度墨卡托不等于我们常用的墨卡托，所以仍然是特例，将百度经纬转百度墨卡托。幸运的是，我们这个库都已经能支持了。<br>本文于南京市中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求）</li>
+</ul>
+<p><img src="/images/demo/tianditu.png" alt="Alt 天地图底图" title="天地图"><br><img src="/images/demo/baidu.png" alt="Alt 百度底图" title="百度地图"><br><img src="/images/demo/google.png" alt="Alt 谷歌底图" title="谷歌地图"><br>例子请参考<a href="http://freegis.github.io/examples/CoordinateTransform.html" target="_blank" rel="external">ol3坐标纠正</a>.<br>github地址<a href="https://github.com/FreeGIS/CoordinateTransform" target="_blank" rel="external">CoordinateTransform.js</a>.</p>
+<h2 id="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform"><a href="#本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform" class="headerlink" title="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis_LayerTransform."></a>本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：<a href="https://github.com/FreeGIS/postgis_LayerTransform" target="_blank" rel="external">postgis_LayerTransform</a>.</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/20/网络底图坐标偏移/" data-id="cj5n5m54y0007h4o0txr07vkn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Ol3+Turf实现点密度图" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/04/Ol3+Turf实现点密度图/" class="article-date">
@@ -96,7 +182,46 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/04/Ol3+Turf实现点密度图/" data-id="cj5lw6s8o0001ggo0wfez7p80" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/04/Ol3+Turf实现点密度图/" data-id="cj5n5m50n0001h4o0yxd4h1kq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Ol3叠加Echarts" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/01/Ol3叠加Echarts/" class="article-date">
+  <time datetime="2016-07-01T06:52:03.000Z" itemprop="datePublished">2016-07-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/01/Ol3叠加Echarts/">Ol3叠加Echarts</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Echarts官网中，有Echarts叠加百度地图展示一些可视化效果。其实百度地图API和Echarts是两个互相独立的东西，看到结合使用效果不错，于是对如何实现比较感兴趣。<br>查看源码可知，其实是将独立的Echarts和百度地图在一个容器中添加，然后，根据坐标对应好位置关系。此后，监听地图放大缩小平移等事件，通知echarts重绘。<br>那么，既然两者之间毫无关系，只有一层对应关系，那么其他地图API也就都能实现这样的功能，果不其然，笔者尝试以Ol3与Echarts做对应关系，也能得到想要的结果。<br><img src="/images/demo/ol3-echarts.png" alt="Alt ol3+echarts" title="ol3+echarts效果图"></p>
+<h2 id="例子请参考ol3-echarts"><a href="#例子请参考ol3-echarts" class="headerlink" title="例子请参考ol3-echarts."></a>例子请参考<a href="http://freegis.github.io/examples/ol3-echarts.html" target="_blank" rel="external">ol3-echarts</a>.</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/01/Ol3叠加Echarts/" data-id="cj5n5m5680009h4o02xx5027m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
@@ -227,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/07/01/FeatureAnimation/" data-id="cj5lw6s8b0000ggo0qz9uubd4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/07/01/FeatureAnimation/" data-id="cj5n5m5060000h4o06ybb6dfw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
@@ -270,7 +395,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li></ul>
     </div>
   </div>
 
@@ -283,7 +408,19 @@
       <ul>
         
           <li>
+            <a href="/2016/10/28/OpenLayers3加载网络底图/">OpenLayers 3加载网络底图</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/20/网络底图坐标偏移/">网络底图坐标偏移</a>
+          </li>
+        
+          <li>
             <a href="/2016/07/04/Ol3+Turf实现点密度图/">Ol3结合Turf实现点密度图</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/01/Ol3叠加Echarts/">Ol3叠加Echarts</a>
           </li>
         
           <li>
