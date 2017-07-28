@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>google_xyz离线切片加载</title>
+    <link rel="stylesheet" href="/plugin/ol/ol.css" type="text/css">
+    <script src="/plugin/ol/ol.js"></script>
+    <script>
+        function init() {
+        	var format = 'image/png';
+        	  var streetLayer=new ol.layer.Tile({
+                visible: true,
+                source: new ol.source.XYZ({
+                    url: '/data/Google_XYZ/{z}/{x}/{y}.png'
+                })
+            });
+			
+            var map = new ol.Map({
+                controls: [],
+                layers: [
+                    streetLayer
+                ],
+                target: 'map',
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([118.7157,32.2]),
+                    zoom: 10
+                })
+            });
+        }
+    </script>
+</head>
+<body onload="init()">
+    <div id="map">
+    </div>
+</body>
+</html>
