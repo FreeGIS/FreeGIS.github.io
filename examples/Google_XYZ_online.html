@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>google_xyz离线切片加载</title>
+    <link rel="stylesheet" href="/plugin/ol/ol.css" type="text/css">
+    <script src="/plugin/ol/ol.js"></script>
+    <script>
+        function init() {
+        	var streetLayer=new ol.layer.Tile({
+                visible: true,
+                source: new ol.source.XYZ({
+                    url: 'http://www.google.cn/maps/vt?pb=!1m5!1m4!1i{z}!2i{x}!3i{y}!4i256!2m3!1e0!2sm!3i342009817!3m9!2szh-CN!3sCN!5e18!12m1!1e47!12m3!1e37!2m1!1ssmartmaps!4e0&token=32965'
+                })
+            });
+			
+            var map = new ol.Map({
+                controls: [],
+                layers: [
+                    streetLayer
+                ],
+                target: 'map',
+                view: new ol.View({
+                    center: ol.proj.fromLonLat([118.7157,32.2]),
+                    zoom: 10
+                })
+            });
+        }
+    </script>
+</head>
+<body onload="init()">
+    <div id="map">
+    </div>
+</body>
+</html>

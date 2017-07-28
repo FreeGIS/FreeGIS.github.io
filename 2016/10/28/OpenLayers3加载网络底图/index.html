@@ -5,22 +5,18 @@
   
   <title>OpenLayers 3加载网络底图 | FreeGIS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ非标准的XYZ加载ArcServer切片加载GeoWebCache切片中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求） 例子请参考">
+  <meta name="description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ示例：[谷歌离线切片][1]. 非标准的XYZ示例：[谷歌在线切片][2]. 加载ArcServer切片示例：[ArcServer离线切片][3]. 加载GeoWebCache切片示例：[GeoWebCache离线切片">
 <meta name="keywords" content="OpenLayers 3">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenLayers 3加载网络底图">
 <meta property="og:url" content="http://yoursite.com/2016/10/28/OpenLayers3加载网络底图/index.html">
 <meta property="og:site_name" content="FreeGIS">
-<meta property="og:description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ非标准的XYZ加载ArcServer切片加载GeoWebCache切片中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求） 例子请参考">
+<meta property="og:description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ示例：[谷歌离线切片][1]. 非标准的XYZ示例：[谷歌在线切片][2]. 加载ArcServer切片示例：[ArcServer离线切片][3]. 加载GeoWebCache切片示例：[GeoWebCache离线切片">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/demo/tianditu.png">
-<meta property="og:image" content="http://yoursite.com/images/demo/baidu.png">
-<meta property="og:image" content="http://yoursite.com/images/demo/google.png">
-<meta property="og:updated_time" content="2017-07-28T00:44:54.473Z">
+<meta property="og:updated_time" content="2017-07-28T01:32:22.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenLayers 3加载网络底图">
-<meta name="twitter:description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ非标准的XYZ加载ArcServer切片加载GeoWebCache切片中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求） 例子请参考">
-<meta name="twitter:image" content="http://yoursite.com/images/demo/tianditu.png">
+<meta name="twitter:description" content="WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。 标准XYZ示例：[谷歌离线切片][1]. 非标准的XYZ示例：[谷歌在线切片][2]. 加载ArcServer切片示例：[ArcServer离线切片][3]. 加载GeoWebCache切片示例：[GeoWebCache离线切片">
   
     <link rel="alternate" href="/atom.xml" title="FreeGIS" type="application/atom+xml">
   
@@ -95,14 +91,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。</p>
-<h2 id="标准XYZ"><a href="#标准XYZ" class="headerlink" title="标准XYZ"></a>标准XYZ</h2><h2 id="非标准的XYZ"><a href="#非标准的XYZ" class="headerlink" title="非标准的XYZ"></a>非标准的XYZ</h2><h2 id="加载ArcServer切片"><a href="#加载ArcServer切片" class="headerlink" title="加载ArcServer切片"></a>加载ArcServer切片</h2><h2 id="加载GeoWebCache切片"><a href="#加载GeoWebCache切片" class="headerlink" title="加载GeoWebCache切片"></a>加载GeoWebCache切片</h2><p>中心采集某一个坐标，根据不同底图的切换，验证我们的纠偏js库的正确性。（注意：本库只用于叠加底图显示，不等于严格坐标解密，基本满足业务需求）</p>
-<p><img src="/images/demo/tianditu.png" alt="Alt 天地图底图" title="天地图"><br><img src="/images/demo/baidu.png" alt="Alt 百度底图" title="百度地图"><br><img src="/images/demo/google.png" alt="Alt 谷歌底图" title="谷歌地图"><br>例子请参考<a href="https://freegis.github.io/examples/CoordinateTransform.html" target="_blank" rel="external">ol3坐标纠正</a>.<br>github地址<a href="https://github.com/FreeGIS/CoordinateTransform" target="_blank" rel="external">CoordinateTransform.js</a>.</p>
-<h2 id="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform"><a href="#本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis-LayerTransform" class="headerlink" title="本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：postgis_LayerTransform."></a>本js代码只适用于少量点在前台叠加，如果是点线面等复杂图层且存放在PostGIS中，应进行全部图层批量转换。PostGIS转换库地址：<a href="https://github.com/FreeGIS/postgis_LayerTransform" target="_blank" rel="external">postgis_LayerTransform</a>.</h2>
+        <p>　　WebGIS中常常使用在线/离线的网络地图作为项目使用的底图，这些底图几乎全部是标准或非标准的XYZ,WMTS为主，本文主要列举一些作者常常用到过的底图以供大家借鉴。</p>
+<h2 id="标准XYZ"><a href="#标准XYZ" class="headerlink" title="标准XYZ"></a>标准XYZ</h2><pre><code>示例：[谷歌离线切片][1].
+</code></pre><h2 id="非标准的XYZ"><a href="#非标准的XYZ" class="headerlink" title="非标准的XYZ"></a>非标准的XYZ</h2><pre><code>示例：[谷歌在线切片][2].
+</code></pre><h2 id="加载ArcServer切片"><a href="#加载ArcServer切片" class="headerlink" title="加载ArcServer切片"></a>加载ArcServer切片</h2><pre><code>示例：[ArcServer离线切片][3].
+</code></pre><h2 id="加载GeoWebCache切片"><a href="#加载GeoWebCache切片" class="headerlink" title="加载GeoWebCache切片"></a>加载GeoWebCache切片</h2><pre><code>示例：[GeoWebCache离线切片][4].
+</code></pre><p>–</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/28/OpenLayers3加载网络底图/" data-id="cj5n6qjxo0005l4o0bsypmchi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/28/OpenLayers3加载网络底图/" data-id="cj5n70z7600047so0h7e9xf33" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenLayers-3/">OpenLayers 3</a></li></ul>
